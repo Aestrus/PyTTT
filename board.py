@@ -5,7 +5,7 @@
 def buildBoard():
 
     # Initialize the board.
-    board = [['', '', '', ''], ['', '', '', ''], ['', '', '', ''], ['', '', '', '']]
+    board = [[' ', ' ', ' ', ' '], [' ', ' ', ' ', ' '], [' ', ' ', ' ', ' '], [' ', ' ', ' ', ' ']]
 
     # Send the board back to the driver program.
     return board
@@ -15,20 +15,22 @@ def buildBoard():
 def printBoard(playerOne, playerTwo, currBoard):
 
     # Set the title that will display over the board.
-    title = 'Player 1 = ' + playerOne + '\tPlayer 2 = ' + playerTwo + '\nX\tO'
+    title = 'Player 1 = ' + playerOne + '\tPlayer 2 = ' + playerTwo + '\nX\t\t\tO'
 
     print(title)
 
     # Go through the current board and print it out.
-    for i in range(len(currBoard)):
-        for j in range(len(currBoard[j])):
-            
-            if j == 2:
-                print('| ' + currBoard[i][j] + ' |')
-            else:
-                print('| ' + currBoard[i][j] + ' ')
-
-    print()
+    print('   |   |')
+    print(' ' + currBoard[0][0] + ' | ' + currBoard[1][0] + ' | ' + currBoard[2][0])
+    print('   |   |')
+    print('-----------')
+    print('   |   |')
+    print(' ' + currBoard[0][1] + ' | ' + currBoard[1][1] + ' | ' + currBoard[2][1])
+    print('   |   |')
+    print('-----------')
+    print('   |   |')
+    print(' ' + currBoard[0][2] + ' | ' + currBoard[1][2] + ' | ' + currBoard[2][2])
+    print('   |   |')
 
     return
 
@@ -48,47 +50,49 @@ def stateCheck(currBoard, currPlayerPiece):
                 return True
     
     # Check for NE -> SW victory.
-    elif currBoard[col + 2][row] == currPlayerPiece:
+    if currBoard[col + 2][row] == currPlayerPiece:
         if currBoard[col + 1][row + 1] == currPlayerPiece:
             if currBoard[col][row + 2] == currPlayerPiece:
                 return True
 
     # Check for first row victory.
-    elif currBoard[col + 1][row] == currPlayerPiece:
+    if currBoard[col][row] == currPlayerPiece:
+        if currBoard[col + 1][row] == currPlayerPiece:
 
-        # Final check for first row victory.
-        if currBoard[col + 2][row] == currPlayerPiece:
-            return True
-        
-        # Check for second column victory.
-        elif currBoard[col + 1][row + 1] == currPlayerPiece:
-
-            # Final check for second column victory.
-            if currBoard[col + 1][row + 2] == currPlayerPiece:
+            # Final check for first row victory.
+            if currBoard[col + 2][row] == currPlayerPiece:
                 return True
+            
+            # Check for second column victory.
+            elif currBoard[col + 1][row + 1] == currPlayerPiece:
+
+                # Final check for second column victory.
+                if currBoard[col + 1][row + 2] == currPlayerPiece:
+                    return True
     
     # Check for first column victory.
-    elif currBoard[col][row + 1] == currPlayerPiece:
+    if currBoard[col][row] == currPlayerPiece:
+        if currBoard[col][row + 1] == currPlayerPiece:
 
-        # Final check for first column victory.
-        if currBoard[col][row + 2] == currPlayerPiece:
-            return True
-
-        # Check for second row victory.
-        elif currBoard[col + 1][row + 1] == currPlayerPiece:
-            
-            # Final check for second row victory.
-            if currBoard[col + 2][row + 1]:
+            # Final check for first column victory.
+            if currBoard[col][row + 2] == currPlayerPiece:
                 return True
+
+            # Check for second row victory.
+            elif currBoard[col + 1][row + 1] == currPlayerPiece:
+                
+                # Final check for second row victory.
+                if currBoard[col + 2][row + 1]:
+                    return True
         
     # Check for last row victory.
-    elif currBoard[col][row + 2] == currPlayerPiece:
+    if currBoard[col][row + 2] == currPlayerPiece:
         if currBoard[col + 1][row + 2] == currPlayerPiece:
             if currBoard[col + 2][row + 2] == currPlayerPiece:
                 return True
 
     # Check for last column victory.
-    elif currBoard[col + 2][row] == currPlayerPiece:
+    if currBoard[col + 2][row] == currPlayerPiece:
         if currBoard[col + 2][row + 1] == currPlayerPiece:
             if currBoard[col + 2][row + 2] == currPlayerPiece:
                 return True
@@ -104,7 +108,10 @@ def isValidPlacement(placement, currBoard):
     row = placement[1]
 
     # If not empty, then it is not a valid placement.
-    if currBoard[col][row] != "":
+    if currBoard[col][row] != " ":
+        return False
+
+    if placement[0] > 2 or placement[1] > 2:
         return False
 
     return True
