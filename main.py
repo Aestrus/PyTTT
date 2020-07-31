@@ -1,20 +1,5 @@
 # Python Tic-Tac-Toe
 
-'''
-- Menu screen to start game (name players, player 1 always starts first)
-- Create the board
-- Recursively insert into board until a player wins or until no pieces are left.
-        - Make sure selected placement is valid before placing.
-            - If it is valid, place piece and then move to next step.
-            - If it is not valid, output that it is invalid and let the player choose again.       
-        - Check state after every turn before moving forward.
-            - If it is still winnable for either player, continue.
-            - If it is not winnable for either player, end game with a draw.
-- Once game is complete, display fancy win or draw screen.
-        - Include "Menu" and "Quit" options after game end.
-            - If nothing is chosen within 15 seconds, automatically quit. Make sure to display that you will be doing this somewhere.
-'''
-
 import board
 
 # Have a module for board manipulation
@@ -86,7 +71,7 @@ def startGame():
 
 # Menu Screen
 print("Welcome to Tic Tac Toe built in Python!\n")
-option = input('Type "start" when you are ready to begin! Otherwise, type "quit" if you want to exit the program. ')
+option = input('Type "start" when you are ready to begin! Otherwise, type "quit" if you want to exit the program.\n')
 
 if option == "start" or option == "Start":
     startGame()
